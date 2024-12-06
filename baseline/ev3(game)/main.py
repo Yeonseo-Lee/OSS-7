@@ -83,8 +83,9 @@ def grab(command):
         grab_motor.stop()
         
     elif command == 'motion2':
-        #open2
-        print(312987)
+        grab_motor.run(500)
+        time.sleep(0.3)
+        grab_motor.stop()
 
 def shoot(command):
     if command == 'zero':
