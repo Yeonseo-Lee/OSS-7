@@ -11,7 +11,7 @@ import time
 #==========[Initialize]==========
 #==========[sensors]==========
 ev3 = EV3Brick()
-gyro = GyroSensor(Port.S4)
+gyro = GyroSensor(Port.S1)
 ser = UARTDevice(Port.S2, baudrate=115200)
 
 #==========[motors]==========
@@ -90,7 +90,7 @@ def shoot(command):
         shooting_motor.run_until_stalled(-100,Stop.COAST,duty_limit=50)
     elif command == 'shoot':
         #shooting
-        shooting_motor.run(1700)
+        shooting_motor.run(1750)
         time.sleep(0.25)
         shooting_motor.stop()
 
