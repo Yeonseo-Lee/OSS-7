@@ -64,8 +64,9 @@ while True:
     try:
         filter_result = process_uart_data(data) # sensor 값 (center x, center y)
         if filter_result == [-1, -1]:
+            robot.straight(100)
             
-        if filter_result[0]!= -1 and filter_result[1]!= -1:
+        elif filter_result[0]!= -1 and filter_result[1]!= -1:
             if filter_result[1] > 85: #공이 카메라 화면 기준으로 아래에 위치 = 로봇에 가까워졌다
                 robot.straight(100) #강제로 앞으로 이동
                 grab('motion3') #공을 잡기
