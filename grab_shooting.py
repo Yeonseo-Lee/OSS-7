@@ -26,28 +26,30 @@ robot = DriveBase(left_motor, right_motor, wheel_diameter=56, axle_track=115)
    
 def grab(command):
     if command == 'motion3':
-        #close
+        #close:공 잡기
         grab_motor.run(3350)
         time.sleep(0.30)
         grab_motor.stop()
-    elif command == 'motion1':
+    elif command in ['motion4','motion1']:
+        #open:공 놓기
         grab_motor.run(-3350)
         time.sleep(0.30)
         grab_motor.stop()
         
     elif command == 'motion2':
+        #잡는 부분을 중간으로 이동
         grab_motor.run(500)
         time.sleep(0.3)
         grab_motor.stop()
 
 def shoot(command):
-    if command == 'zero':
-        #zero_position
+    if command == 'zero': 
+        #zero_position:초기화
         shooting_motor.run(-7750)
         time.sleep(0.25)
         shooting_motor.stop()
     elif command == 'shoot':
-        #shooting
+        #shooting:발사 기능
         shooting_motor.run(7750)
         time.sleep(0.25)
         shooting_motor.stop()
