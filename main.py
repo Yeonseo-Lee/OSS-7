@@ -11,6 +11,7 @@ import time
 #==========[Initialize]==========
 #==========[sensors]==========
 ev3 = EV3Brick()
+<<<<<<< HEAD
 gyro = GyroSensor(Port.S3)
 ser = UARTDevice(Port.S2, baudrate=115200) # 공 tracking
 toucn = TouchSensor(Port.S1) # touch sensor.
@@ -18,6 +19,14 @@ toucn = TouchSensor(Port.S1) # touch sensor.
 #==========[motors]==========
 grab_motor = Motor(Port.C)
 shooting_motor = Motor(Port.B)
+=======
+gyro = GyroSensor(Port.S4)
+ser = UARTDevice(Port.S3, baudrate=115200) # 공 trackingx``
+
+#==========[motors]==========
+grab_motor = Motor(Port.B)
+shooting_motor = Motor(Port.C)
+>>>>>>> sensor
 
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
@@ -44,18 +53,29 @@ def turn(target_angle, power):
 def grab(command):
     if command == 'motion3':
         #close
+<<<<<<< HEAD
         grab_motor.run(3350)
         time.sleep(0.20)
         grab_motor.stop()
         
+=======
+        grab_motor.run(3350) 
+        time.sleep(0.30)
+        grab_motor.stop()
+>>>>>>> sensor
     elif command == 'motion1':
         grab_motor.run(-3350)
         time.sleep(0.30)
         grab_motor.stop()
         
     elif command == 'motion2':
+<<<<<<< HEAD
         grab_motor.run(400)
         time.sleep(0.20)
+=======
+        grab_motor.run(300)
+        time.sleep(0.2)
+>>>>>>> sensor
         grab_motor.stop()
 
 def shoot(command):
@@ -64,6 +84,7 @@ def shoot(command):
         shooting_motor.run(-7750)
         time.sleep(0.25)
         shooting_motor.stop()
+<<<<<<< HEAD
 
     elif command == 'shoot':
         #shooting
@@ -71,6 +92,15 @@ def shoot(command):
         time.sleep(0.2)
         shooting_motor.stop()
 
+=======
+    elif command == 'shoot':
+        #shooting
+        shooting_motor.run(8000)
+        time.sleep(0.25)
+        shooting_motor.stop()
+
+
+>>>>>>> sensor
 #==========[camera_chase]==========
 def process_uart_data(data):
     try:
@@ -117,6 +147,7 @@ while True:
     # 데이터 처리 및 결과 필터링
     try:
         filter_result = process_uart_data(data) # sensor 값 (center x, center y)
+<<<<<<< HEAD
         if filter_result[0] == -1 and filter_result[1] == -1:
             robot.drive(100, 0)   # 공이 안 보이면 보일 때까지 앞으로 직진
         elif filter_result[0]!= -1 and filter_result[1]!= -1:
@@ -128,13 +159,32 @@ while True:
                 robot.straight(50)
                 print('straight')
                 time.sleep(0.1) #동작간 딜레이
+=======
+        print(filter_result)
+        if filter_result[0] == -1 and filter_result[1] == -1:
+            robot.drive(100, 0)   # 공이 안 보이면 보일 때까지 앞으로 직진
+        elif filter_result[0]!= -1 and filter_result[1]!= -1:
+            if filter_result[1] > 85: #공이 카메라 화면 기준으로 아래에 위치 = 로봇에 가까워졌다
+                time.sleep(0.2)
+                grab('motion3') #공을 잡기
+                time.sleep(0.2) #동작간 딜레이
+                turn(0, 50) #정면(상대방 진영)바라보기
+                robot.straight(50)
+                print('straight')
+                time.sleep(0.2) #동작간 딜레이
+>>>>>>> sensor
                 print('motion1')
                 robot.straight(-30)
                 grab('motion1') #슛을 위한 열기
                 time.sleep(0.1) #동작간 딜레이
+<<<<<<< HEAD
                 print('shoot')
                 shoot('shoot') #공 날리기
                 time.sleep(0.2) #동작간 딜레이
+=======
+                shoot('shoot') #공 날리기
+                time.sleep(0.1) #동작간 딜레이
+>>>>>>> sensor
                 shoot('zero')
                 print('motion2')
                 grab('motion2')
